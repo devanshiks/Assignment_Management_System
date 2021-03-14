@@ -1,0 +1,214 @@
+<html>
+<head>
+    <title>Student Registration Page</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+        /*margin: 0;*/
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 2em;
+        color: #212529;
+        text-align: center;
+        /*background-color: #f5f8fa;*/
+        background-color: #E1E8EE;
+        }
+
+        .login-form{
+            margin-top:15vh;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .login-form .row{
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        button{
+            padding-bottom: 1.5rem;
+        }
+        /*.row input{
+            background-color: #fff;
+            border-color: #bbb;
+            color: #555;
+        }*/
+
+    </style>
+
+</head>
+<body>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                {% if msg %}
+                <div class="alert alert-danger" style="padding:0;"role="alert">
+                    {{msg}}
+                </div>
+                {% endif %}
+                {%if msg_pass %}
+                <div class="alert alert-danger mt-2 mb-4" style="padding:0;"  role="alert">
+                    {{msg_pass}}
+                </div>
+                {% endif %}
+                {%if msg_zip %}
+                    <div class="alert alert-danger mt-2 mb-4"  style="padding:0;" role="alert">
+                    {{msg_zip}}
+                    </div>
+                {% endif %}
+                {%if msg_phone %}
+                <div class="alert alert-danger mt-2 mb-4" style="padding:0;"  role="alert">
+                    {{msg_phone}}
+                </div>
+                {% endif %}
+                <div class="card">
+                    <div class="card-header" style="background-color:white;color:black;">STUDENT REGISTRATION</div>
+                    <div class="card-body" style="background-color:rgb(0, 153, 153,0.8);" >
+                        <form  action="/StudentRegister/" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %} 
+                            <!--Name-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control " name="stu_name" placeholder="Name"  autocomplete="off" required/>
+                                </div>
+                            </div>
+                            <!--Email-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="email" class="form-control " name="stu_email" placeholder="Email"  autocomplete="off" required/>
+                                </div>
+                            </div>
+                            <!--Password-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="password" class="form-control " name="stu_password" placeholder="Password" autocomplete="off" required/>
+                                </div>
+                            </div>
+                             <!--RePassword-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="password" class="form-control " name="stu_repassword" placeholder="Confirm Password" autocomplete="off" required/>
+                                </div>
+                            </div>
+                            <!-- Birth Date -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="date" name="stu_dob" id="date" placeholder="Birthdate"  autocomplete="off" required/>
+                                </div>
+                            </div>
+                            <!--Gender-->
+                            <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-md-4">Gender</legend>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio"  style="margin-top:18px;" name="stu_gender" id="Male" value="Male" checked>
+                                        <label class="form-check-label" for="Male">
+                                            Male
+                                        </label>
+                                    </div>  
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" style="margin-top:18px;" name="stu_gender" id="Female" value="Female">
+                                        <label class="form-check-label" for="Female">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            </fieldset>
+                            <!-- Semester -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <select id="inputState" class="form-control" name="stu_sem">
+                                        <option name="--" value="--" selected>-- Select Semester --</option>
+                                        <option name="1" value="1">1</option>
+                                        <option name="2" value="2">2</option>
+                                        <option name="3" value="3" >3</option>
+                                        <option name="4" value="4" >4</option>
+                                        <option name="5" value="5" >5</option>
+                                        <option name="6" value="6" >6</option>
+                                        <option name="7" value="7" >7</option>
+                                        <option name="8" value="8" >8</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Branch -->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                      <select id="inputState" class="form-control" name="stu_branch">
+                                        <option name="--" value="--" selected>-- Select Branch --</option>
+                                        <option name="CE" value="CE">CE</option>
+                                        <option name="IT" value="It">IT</option>
+                                        <option name="EC" value="EC" >EC</option>
+                                        <option name="CH" value="CH" >CH</option>
+                                        <option name="MH" value="MH" >MH</option>
+                                        <option name="IC" value="IC" >IC</option>
+                                        <option name="CL" value="CL" >CL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Address-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <textarea type="text" class="form-control" name="stu_address" placeholder="Address" rows="3"  autocomplete="off" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <!--City-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control " name="stu_city" placeholder="City"  autocomplete="off" required/>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <!--State-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control " name="stu_state" placeholder="State"  autocomplete="off" required/>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <!--Pincode-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control " name="stu_zip" placeholder="Pincode"  autocomplete="off" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact No-->
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control " name="stu_mobile_no" placeholder="Contact No" autocomplete="off" required/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-dark btn-lg btn-block">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

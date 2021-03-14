@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>Student Registration Page</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #E1E8EE;
+        }
+
+        .nav-item{
+            margin-left:40px;
+            text-transform:uppercase;
+            font-weight:600;
+        }
+        a{
+            transition: .3s color ease-in-out;
+        }
+            
+         .nav-item:before{
+            position:absolute;
+            pointer-events: none;
+            z-index:-1;
+            content: '';
+            top: 100%;
+            left: 5%;
+            height:10px;
+            width:90%;
+            opacity:0;
+            background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+            transition-duration: 0.3s;
+            transition-property: transform, opacity;
+        }
+     
+        .nav-item:hover, .nav-item:active, .nav-item:focus{
+            transform: translateY(-5px);
+        }
+
+        .nav-item:hover:before, .nav-item:active:before, .nav-item:focus:before{
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+    @keyframes bounce-animation {
+    16.65% {
+        -webkit-transform: translateY(8px);
+        transform: translateY(8px);
+    }
+
+    33.3% {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+    }
+
+    49.95% {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+    }
+
+    66.6% {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+
+    83.25% {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    }
+
+    .bounce {
+    animation-name: bounce-animation;
+    animation-duration: 2s;
+    }
+
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color:#00264d;"> 
+    <div class="container"> 
+        <a class="navbar-brand text-success" href="#"> AssigmentHanlder </a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span> 
+        </button> 
+        
+        <div class="collapse navbar-collapse"></div> 
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item active"><a class="nav-link"  href="#"> Home  <span class="sr-only"> (current) </span> </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="#"> About </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="#"> Contact </a> </li> 
+            </ul> 
+        </div> 
+    </div> 
+</nav> 
+
+<script>
+$(function(){
+  var str = '#len'; //increment by 1 up to 1-nelemnts
+  $(document).ready(function(){
+    var i, stop;
+    i = 1;
+    stop = 4; //num elements
+    setInterval(function(){
+      if (i > stop){
+        return;
+      }
+      $('#len'+(i++)).toggleClass('bounce');
+    }, 500)
+  });
+});
+</script>
+
+</body> 
+  
+</html>

@@ -1,0 +1,99 @@
+<html>
+<head>
+    <title>Login Page</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+        /*margin: 0;*/
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 2em;
+        color: #212529;
+        text-align: center;
+        /*background-color: #f5f8fa;*/
+        background-color: #E1E8EE;
+        }
+
+        .login-form{
+            margin-top:15vh;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .login-form .row{
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        button{
+            padding-bottom: 1.5rem;
+        }
+        /*.row input{
+            background-color: #fff;
+            border-color: #bbb;
+            color: #555;
+        }*/
+
+    </style>
+
+</head>
+<body>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                {% if msg %}
+                <div class="alert alert-danger" style="padding:0;"role="alert">
+                    {{msg}}
+                </div>
+                {% endif %}
+                <div class="card">
+                    <div class="card-header" style="background-color:white;color:black;">LOG IN</div>
+                    <div class="card-body" style="background-color:rgb(0, 153, 153,0.8);" >
+                        <form action="/Login/" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %} 
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input  type="text" class="form-control"  name="email" placeholder="Email" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="password"  class="form-control" name="password" placeholder="Password" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-dark btn-lg btn-block">
+                                    Login
+                                </button>
+                                <div class="text-center">
+                                    <p style="margin-top:1.5em;" >Not a member? <a style="color:white; outline:none;"href="/Select/">Register</a></p>
+                                </div>
+                                <form action="#">
+                                    <input class="btn btn-outline-dark btn-sm" type="submit" value="Forgot your password?">
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
