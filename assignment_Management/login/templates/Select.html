@@ -9,23 +9,39 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <style>
+        body{
+            background-color:#E1E8EE;
+        }
     </style>
    
 </head>
 <body>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <h5 class="card-title">Teacher Registration</h5>
-        <p class="card-text">Teachers have to Register here.</p>
-        <button type="button" id="teach"class="btn btn-success"><a href="/TeacherRegisterPage/">Register</a></button>
-  </div>
-  <div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <h5 class="card-title">Student Registration</h5>
-        <p class="card-text">Students have to Register here.</p>
-        <button type="button" id="stu" class="btn btn-success"><a href="/StudentRegisterPage/">Register</a></button>
-  </div>
+<div class="container">
+            <div class="row" style="margin-top:35vh;">
+                <div class="col-sm-6">
+                    <div class="card" style="width: 25rem; height:14em; margin-left:8vh;">
+                        <div class="card-header" style="text-align:centre; background-color:white; height:3.5em;">TEACHER REGISTRATION</div>
+                        <div class="card-body" style="background:linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109)); font-weight:700;">
+                            <p class="card-text" style="margin-top:2vh;">TEACHERS HAVE TO REGISTER HERE.</p>
+                            <button type="submit" class="btn btn-dark btn-lg btn-block" style="margin-top:4vh;">
+                                <a style="color:white; outline:none;" href="/TeacherRegisterPage/">Register</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 25rem; height:14em; margin-left:3vh;">
+                        <div class="card-header" style="text-align:centre; background-color:white; height:3.5em;">STUDENT REGISTRATION</div>
+                        <div class="card-body" style=" background:linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109)); font-weight:700;">
+                            <p class="card-text" style="margin-top:2vh;">STUDENTS HAVE TO REGISTER HERE.</p>
+                            <button type="submit" class="btn btn-dark btn-lg btn-block" style="margin-top:4vh;">
+                                <a style="color:white; outline:none;" href="/StudentRegisterPage/">Register</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </div>
 
 </body>

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
-from login.views import StudentRegister,TeacherRegister,Select,Login,TeacherRegisterPage,StudentRegisterPage,LoginPage
+from login.views import StudentRegister,TeacherRegister,Select,Login,TeacherRegisterPage,StudentRegisterPage,LoginPage,Logout
 
 urlpatterns = [
     path('', LoginPage),
@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^TeacherRegister/',TeacherRegister),
     url(r'^Login/',Login),
     url(r'^Select/',Select),
+    url(r'Logout/',Logout),
+
 ]

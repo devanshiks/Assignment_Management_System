@@ -21,6 +21,10 @@ def LoginPage(request):
     c.update(csrf(request))
     return render(request, 'Login.html', context=None)
 
+def Logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 def StudentRegister(request):
     stu_email=request.POST.get('stu_email','')
     stu_name=request.POST.get('stu_name','')
@@ -114,10 +118,10 @@ def Login(request):
     stu = Student.objects.filter(stu_email=email)
     if teach.exists():
         auth.login(request,User)
-        return HttpResponseRedirect('/Teacher/Home')
+        return HttpResponseRedirect('/Teacher/Home/')
     elif stu.exists():
         auth.login(request,User)
-        return HttpResponseRedirect('/StudentRegisterPage/')
+        return HttpResponseRedirect('/Student/StudentHomePage/')
     else:
         msg = "Invalid Username or Password!"
         return render(request,'Login.html', {'msg':msg})

@@ -1,0 +1,48 @@
+ #it is actually for submitted assignments
+ pending=[]
+        for i in assignment:
+            p = Submission.objects.filter(submission_assignment=i)
+            print(p)
+            for j in p:
+                pending.append(j)
+                print(j)
+        print(pending)
+
+ c=[] #all courses List
+        for i in course:
+            c.append(i)
+            print(i)
+        print("all courses:",c)
+        enrolled=[] # All student enrolled courses
+        sc = StudentCourse.objects.all()
+        for i in sc:
+            enrolled.append(i.course)
+        print("enrolled courses are:",enrolled)
+        cor=[] # Student enrolled courses which are added by teacherS
+        for i in range(len(c)):
+            if c[i] not in enrolled:
+               pass
+            else:
+                cor.append(c[i])
+                print(i)
+        print("enrolled courses are:",cor)
+        studentcourse=[]
+        for i in cor:
+            s = StudentCourse.objects.filter(Course=i)
+            studentcourse.append(s)
+        print(studentcourse)
+
+ # students enrolled in courses added by loggedin teacher
+        course = Course.objects.filter(teacher=current_user)
+        student=[]
+        cor=[]
+        studentcourse=[]
+        for i in course:
+            sc = StudentCourse.objects.filter(course=i)
+            if sc.exists():
+                #for j in sc:
+                    #cor.append(j.course)
+                    #student.append(j.student)
+                studentcourse.append(sc)
+        print("enrolled courses of students:", cor)
+        print("student:",student)

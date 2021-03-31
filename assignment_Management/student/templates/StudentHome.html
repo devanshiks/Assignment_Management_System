@@ -1,0 +1,219 @@
+<html>
+<head>
+    <title>Home</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            /*background-color: #E1E8EE;*/
+            background:linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+        }
+
+        .nav-item{
+            margin-left:40px;
+            text-transform:uppercase;
+            font-weight:600;
+        }
+        a{
+            transition: .3s color ease-in-out;
+        }
+            
+         .nav-item:before{
+            position:absolute;
+            pointer-events: none;
+            z-index:-1;
+            content: '';
+            top: 100%;
+            left: 5%;
+            height:10px;
+            width:90%;
+            opacity:0;
+            background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+            transition-duration: 0.3s;
+            transition-property: transform, opacity;
+        }
+     
+        .nav-item:hover, .nav-item:active, .nav-item:focus{
+            transform: translateY(-5px);
+        }
+
+        .nav-item:hover:before, .nav-item:active:before, .nav-item:focus:before{
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+    @keyframes bounce-animation {
+    16.65% {
+        -webkit-transform: translateY(8px);
+        transform: translateY(8px);
+    }
+
+    33.3% {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+    }
+
+    49.95% {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+    }
+
+    66.6% {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+
+    83.25% {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    }
+
+    .bounce {
+    animation-name: bounce-animation;
+    animation-duration: 2s;
+    }
+
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+        /*background-color:#136b66;*/
+         background-color:#cccccc;
+       
+        }
+    .table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+         /*background-color:#0d4744;*/
+        background-color:#e6e6e6;
+         
+    }
+    /*.nav li a:active{
+        background-color:red;
+    }
+     .nav li a:hover{
+        background-color:red;
+    }*/
+
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color:#00264d;"> 
+    <div class="container"> 
+        <a class="navbar-brand text-success" href="#"> AssigmentHandler </a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span> 
+        </button> 
+        
+        <div class="collapse navbar-collapse"></div> 
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item active"><a class="nav-link"  href="/Student/StudentHomePage/"> Home <span class="sr-only"> (current) </span>  </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="/Student/StudentCourseList/"> Courses </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="/Logout/"> Log Out </a> </li> 
+            </ul> 
+        </div> 
+    </div> 
+</nav> 
+
+<div class="container" style=" margin-top:12vh; background-color:white;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab"   href="#home">Assignments</a></li>
+    <li><a data-toggle="tab"  href="#menu1">Submissions</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <h3>PENDING ASSIGNMENTS</h3>
+        <table class="table table-striped" style="color:black; font-weight:600;">
+            <thead style=" background-color:#0d4744; color:white; font-weight:bold;">
+                <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Created On</th>
+                    <th>Due Date</th>
+                    <th>File</th>
+                    <th>Submission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in pending %}
+                <tr>
+                    <td> {{a.assignment_name}}</td>
+                    <td>{{a.assignment_course.course_name}}</td>
+                    <td>{{a.assignment_created}}</td>
+                    <td>{{a.assignment_due_date}}</td>
+                    <td>
+                        <a class="btn btn-dark" role="button" href="{{a.assignment_file.url}}" style="color:white;">View File</a>
+                    </td>
+                    <td>
+                        <form action="/Student/AddSubmissionPage/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{a.assignment_id}}">
+                            <input type="submit" class="btn btn-dark" value="Upload" style="background-color: #10325f;" />
+                        </form>
+                    </td>
+                </tr>  
+                {% endfor%}      
+            </tbody>
+        </table>
+    </div>
+
+    <div id="menu1" class="tab-pane fade">
+        <h3>UPLOADED SUBMISSIONS </h3>
+        <table class="table table-striped" style="color:black; font-weight:600;">
+            <thead style=" background-color:#0d4744; color:white; font-weight:bold;">
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Assignment Name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in submitted%}
+                <tr>
+                    <td>{{i.submission_assignment.assignment_course.course_id}}</td>
+                    <td>{{i.submission_assignment.assignment_course.course_name}}</td>
+                    <td>{{i.submission_assignment.assignment_name}}</td>
+                    {% if i.submission_marks %}
+                    <td>{{i.submission_marks}}</td>
+                    {%else %}
+                    <td style="color:red;">PENDING</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">Teacher Registration</h5>
+                    <p class="card-text">Teachers have to Register here.</p>
+                    <button type="button" id="teach"class="btn btn-success"><a href="/TeacherRegisterPage/">Register</a></button>
+                </div>
+
+<div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">Student Registration</h5>
+                    <p class="card-text">Students have to Register here.</p>
+                    <button type="button" id="stu" class="btn btn-success"><a href="/StudentRegisterPage/">Register</a></button>
+                </div>

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Student Registration Page</title>
+    <title>Home</title>
     {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -89,6 +89,16 @@
     animation-duration: 2s;
     }
 
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+        background-color:#136b66;
+       
+        }
+    .table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+         background-color:#0d4744;
+         
+        }
+
+
 }
     </style>
 </head>
@@ -96,7 +106,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color:#00264d;"> 
     <div class="container"> 
-        <a class="navbar-brand text-success" href="#"> AssigmentHanlder </a> 
+        <a class="navbar-brand text-success" href="#"> AssigmentHandler </a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="navbar-toggler-icon"></span> 
@@ -106,13 +116,105 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
             <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item active"><a class="nav-link"  href="#"> Home  <span class="sr-only"> (current) </span> </a> </li> 
-                <li class="nav-item"> <a class="nav-link" href="#"> About </a> </li> 
-                <li class="nav-item"> <a class="nav-link" href="#"> Contact </a> </li> 
+                <li class="nav-item active"><a class="nav-link"  href="/Teacher/Home/"> Home <span class="sr-only"> (current) </span> </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="/Teacher/CoursesPage/"> Courses </a> </li> 
+                 <li class="nav-item"> <a class="nav-link" href="/Teacher/StudentDetailsPage/"> Student </a> </li> 
+                <li class="nav-item"> <a class="nav-link" href="/Logout/"> Log Out </a> </li> 
             </ul> 
         </div> 
     </div> 
 </nav> 
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Add Course Form -->
+        <div class="col-lg-5 col-md-5 col-sm-6" style="padding:50px; height:100vh; background:linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));">
+            <div class="card" style="margin-top:10vh; box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+                <div class="card-header" style="text-align:centre;">Add Assignment</div>
+                <div class="card-body" >
+                    <form  action="/Teacher/AddAssignment/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label for="inputid">Assignment Name</label>
+                            <input type="text" class="form-control" id="inputid" name="assignment_name" autocomplete="off" required>
+                        </div>
+
+                        <!-- Courses -->
+                        <div class="form-group">
+                            <label for="inputbr">Select Course</label>
+                                <select id="inputbr" class="form-control"  name="assignment_course" autocomplete="off" required>
+                                    {% for i  in cor %}
+                                        <option value="{{i.course_name}}">
+                                            {{i.course_name}}, {{i.course_branch}}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <!-- Due Date -->
+                        <div class="form-group">
+                            <label for="date">Due Date</label>
+                            <input type="date" class="form-control" id="date" placeholder="Birthdate : DD/MM/YYYY"  name="assignment_due_date" autocomplete="off" required>
+                        </div>
+
+                        <!-- upload file-->
+                        <div class="form-group">
+                            <label for="inputfile">Upload Assignment File</label>
+                            <input type="file" class="form-control" id="inputfile" name="assignment_file" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark btn-block">Add Assignment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!--div class="col-lg-1-md-1 col-sm-0" style="background-color:yellow;">
+            <div class="vl"></div>
+        </div-->
+        <div class="col-lg-7 col-md-7 col-sm-6">
+                <table class="table table-striped"  style="margin-top:17vh;  color:white;">
+                    <thead style="background-color:#0d4744; color:white; font-weight:bold;">
+                        <tr>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Created On</th>
+                            <th>Due Date</th>
+                            <th>File</th>
+                            <th>Submission</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in assignment %}
+                        <tr>
+                            <td>{{a.assignment_name}}</td>
+                            <td>{{a.assignment_course.course_name}}</td>
+                            <td>{{a.assignment_created}}</td>
+                            <td>{{a.assignment_due_date}}</td>
+                            <td>
+                                <a class="btn btn-dark" role="button" href="{{a.assignment_file.url}}" style="color:white; background-color: #10325f;">View File</a>
+                            </td>
+                            <td>
+                                <form action="/Teacher/ViewAssignmentSubmission/" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{a.assignment_id}}">
+                                    <input type="submit" class="btn btn-dark" value="view Submissions" style="background-color: #10325f; color:white;" />
+                                </form>
+                            </td>
+                        </tr>  
+                        {% endfor%}        
+                    </tbody>
+                </table>
+        </div>
+
+    </div>
+
+     
+</div>
+
 
 <script>
 $(function(){

@@ -1,0 +1,107 @@
+class Submission(models.Model):
+    submission_id=models.AutoField(primary_key=True)
+    submission_file=models.FileField(upload_to='submissions/',null=True)
+    submission_assignment=models.ForeignKey(Assignment,on_delete=models.CASCADE,default=None,related_name="assignment")
+    submission_student=models.ForeignKey(Student,on_delete=models.CASCADE,default=None,related_name="submission_student")
+    submission_marks=models.FloatField(default=None)
+    submission_added_time=models.DateTimeField(default=None)
+
+admin.site.register(Submission)
+
+def AddSubmission(request):
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_user=Student.objects.get(stu_email=loggedin_user)
+        getid=request.POST.get('id','')
+        print("id is:",getid)
+        assignment=Assignment.objects.get(assignment_id=getid)
+        print(assignment)
+        submission_file=request.FILES['submission_file']
+        s = Submission(submission_file=submission_file, submission_assignment=assignment, submission_student=current_user)
+        s.save()
+        print("Submission uploaded successfully")
+    return render(request,'AddSubmission.html')
+
+
+def StudentDetailsPage(request): # Enrolled Students and their Submissions
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_user= Teacher.objects.get(teach_email=loggedin_user)
+        # students enrolled in courses added by loggedin teacher
+        course = Course.objects.filter(teacher=current_user)
+        studentcourse=[]
+        for i in course:
+            sc = StudentCourse.objects.filter(course=i)
+            if sc.exists():
+                for j in sc:
+                    studentcourse.append(j)
+        print("studentcourse:",studentcourse)
+        #submission List
+        student=[]
+        for i in studentcourse:
+            student.append(i.student)
+        submission=[]
+        for i in student:
+            s = Submission.objects.filter(submission_student=i)
+            if s.exists():
+                for j in s:
+                    submission.append(j)
+        print("submission are:",submission)
+        return render(request, 'StudentDetails.html', {'studentcourse':studentcourse, 'submission':submission})
+
+def ViewAssignmentSubmission(request):
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_user= Teacher.objects.get(teach_email=loggedin_user)
+        getid=request.POST.get('id','')
+        a = Assignment.objects.get(assignment_id=getid)
+        print(a)
+        sc = Submission.objects.filter(submission_assignment=a)
+        print(sc)
+        sc1 = []
+        for i in sc:
+            sc1.append(i)
+        print(sc1)
+    return render(request, 'ViewAssignmentSubmission.html',{'sc1':sc1})
+
+
+
+def StudentHomePage(request):
+    #Pending Assignments of students in enrolled courses
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        print(loggedin_user)
+        current_user=Student.objects.get(stu_email=loggedin_user)
+        print(current_user)
+        #object of students who enrolled in a course
+        enrolled = StudentCourse.objects.filter(student=current_user)
+        print("enrolled courses:", enrolled)
+        #list of courses objects from the enrolled queryset
+        course=[]
+        for i in enrolled:
+            course.append(i.course)
+            print("courses are: ",course)
+        assignment=[]
+        for j in course:
+            #checking for assignments in 'j' particular course
+            a = Assignment.objects.filter(assignment_course=j)
+            print("assignment in courses:",a)
+            # a will give queryset, but we want the fields which are inside the objects, so first we wil extract the objects
+            for i in a:
+                # now there are only objects and not queryset, so fields can be easily extracted
+                assignment.append(i)
+                print("assignment in courses:",i)
+        print(assignment)
+        submitted=[]
+        pending=[]
+        for i in assignment:
+            s = Submission.objects.filter(submission_assignment=i)
+            print(s)
+            if s.exists():
+                submitted.append(s)
+            else:
+                pending.append(i)
+
+        print("submitted list:",submitted)
+        print("Pending list:", pending)   
+        return render(request, 'StudentHome.html', {'pending':pending})
