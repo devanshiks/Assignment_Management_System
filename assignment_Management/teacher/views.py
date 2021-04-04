@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from teacher.models import Course,Assignment
 from student.models import StudentCourse, Submission
@@ -14,7 +15,8 @@ from django.db.models.fields import DateTimeField
 import datetime
 import cgi,os,sys
 import cgitb
-from django.views.decorators.clickjacking import xframe_options_exempt
+from django.core import paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def Home(request):
@@ -23,6 +25,16 @@ def Home(request):
         current_user= Teacher.objects.get(teach_email=loggedin_user)
         cor = Course.objects.filter(teacher=current_user)
         assignment=Assignment.objects.filter(assignment_teacher=current_user)
+        if assignment.exists():
+            paginator = Paginator(assignment,4)
+            page = request.GET.get('page', 1)
+            try:
+                assignment = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            return render(request, 'Home.html',{'assignment':assignment,'cor':cor})
     return render(request, 'Home.html',{'cor':cor, 'assignment':assignment})
 
 def CoursesPage(request):
@@ -61,7 +73,8 @@ def AddAssignment(request):
         assign.save()
         assignment=Assignment.objects.filter(assignment_teacher=teacher)
         cor=Course.objects.filter(teacher=teacher)
-    return render(request, 'Home.html', {'cor':cor,'course': course, 'assignment':assignment})
+        msg="Assignment Added Successfully"
+    return render(request, 'Home.html', {'cor':cor,'course': course, 'assignment':assignment, 'msg':msg})
 
 def StudentDetailsPage(request): # Enrolled Students and their Submissions
     if request.user.is_authenticated:
@@ -76,6 +89,14 @@ def StudentDetailsPage(request): # Enrolled Students and their Submissions
                 for j in sc:
                     studentcourse.append(j)
         print("studentcourse:",studentcourse)
+        paginator = Paginator(studentcourse,4)
+        page = request.GET.get('page', 1)
+        try:
+            studentcourse = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
         return render(request, 'StudentDetails.html', {'studentcourse':studentcourse})
 
 def ViewAssignmentSubmission(request):
@@ -103,13 +124,12 @@ def ViewStudentSubmission(request):
         print(cor)
         getemail=request.POST.get('em','')
         stu=Student.objects.get(stu_email=getemail)
-        #print("final",s)
         sub=[]
         s = Submission.objects.filter(submission_student=stu)
         for i in s:
             if i.submission_assignment.assignment_course == cor:
                 sub.append(i)
-        print("kjnckjd",sub)
+        print("Submissions",sub)
         # students enrolled in courses added by loggedin teacher
         course = Course.objects.filter(teacher=current_user)
         studentcourse=[]
@@ -119,7 +139,16 @@ def ViewStudentSubmission(request):
                 for j in sc:
                     studentcourse.append(j)
         print("studentcourse:",studentcourse)
-        return render(request, 'StudentDetails.html', {'studentcourse':studentcourse, 'sub':sub})
+        #pagination
+        paginator = Paginator(studentcourse,4)
+        page = request.GET.get('page', 1)
+        try:
+            studentcourse = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        return render(request, 'StudentDetails.html', {'studentcourse':studentcourse, 'sub':sub, 'getid':getid})
         
 def AddMarks(request):
     if request.user.is_authenticated:
@@ -140,3 +169,10 @@ def AddMarks(request):
         print(sc1)
         return render(request,'ViewAssignmentSubmission.html',{'sc1':sc1, 'assign_id':assign_id})
 
+def DeleteAssignment(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        assignment=Assignment.objects.get(assignment_id=getid)
+        assignment.delete()
+        msg="Deleted successfully!!"
+        return Home(request)

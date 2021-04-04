@@ -92,16 +92,17 @@ def StudentHomePage(request):
                 assignment.append(i)
                 print("assignment in courses:",i)
         print(assignment)
+
         submitted=[]
         pending=[]
         for i in assignment:
-            s = Submission.objects.filter(submission_assignment=i)
+            s = Submission.objects.filter(submission_student=current_user,submission_assignment=i)
             print(s)
             if s.exists():
-                submitted.append(s)
+                for j in s:
+                   submitted.append(j)
             else:
                 pending.append(i)
-
         print("submitted list:",submitted)
         print("Pending list:", pending)   
-        return render(request, 'StudentHome.html', {'pending':pending})
+        return render(request, 'StudentHome.html', {'pending':pending,'submitted':submitted})

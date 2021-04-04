@@ -106,7 +106,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color:#00264d;"> 
     <div class="container"> 
-        <a class="navbar-brand text-success" href="#"> AssigmentHandler </a> 
+        <a class="navbar-brand" href="#" style="font-size: 25px;"> AssigmentHandler </a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="navbar-toggler-icon"></span> 
@@ -176,7 +176,8 @@
             <div class="vl"></div>
         </div-->
         <div class="col-lg-7 col-md-7 col-sm-6">
-                <table class="table table-striped"  style="margin-top:17vh;  color:white;">
+                <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif;">Assignment List</h2> 
+                <table class="table table-striped"  style=" color:white;">
                     <thead style="background-color:#0d4744; color:white; font-weight:bold;">
                         <tr>
                             <th>Name</th>
@@ -185,6 +186,7 @@
                             <th>Due Date</th>
                             <th>File</th>
                             <th>Submission</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -204,10 +206,32 @@
                                     <input type="submit" class="btn btn-dark" value="view Submissions" style="background-color: #10325f; color:white;" />
                                 </form>
                             </td>
+                            <td>
+                                <form action="/Teacher/DeleteAssignment/" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{a.assignment_id}}">
+                                    <input type="submit" class="btn btn-dark" value="Delete" style="background-color: #10325f; color:white;" />
+                                </form>
+                            </td>
                         </tr>  
                         {% endfor%}        
                     </tbody>
                 </table>
+                <!--Pagination-->
+                {% if assignment.has_other_pages %}
+                <ul class="pagination d-flex justify-content-center mt-5">
+                    {% if assignment.has_previous %}
+                    <li class="page-item mr-2 "> <a class="page-link" href="?page={{ assignment.previous_page_number }}"> Previous</a> </li>
+                    {% endif %} {% for i in assignment.paginator.page_range %} {% if assignment.number == i %}
+                    <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
+
+                    {% else %}
+                    <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %} {% endfor %} {% if assignment.has_next %}
+                    <li class="page-item mr-2"><a class="page-link" href="?page={{ assignment.next_page_number }}">Next</a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
         </div>
 
     </div>

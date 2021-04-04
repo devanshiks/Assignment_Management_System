@@ -118,7 +118,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color:#00264d;"> 
     <div class="container"> 
-        <a class="navbar-brand text-success" href="#"> AssigmentHandler </a> 
+        <a class="navbar-brand" href="#" style="font-size: 25px;"> AssigmentHandler </a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="navbar-toggler-icon"></span> 
@@ -143,7 +143,7 @@
             -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
 
   <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab"   href="#home">Students</a></li>
+    <li class="active"><a data-toggle="tab"  href="#home">Students</a></li>
     {% if sub %}
     <li><a data-toggle="tab"  href="#menu1">Submissions</a></li>
     {% endif %}
@@ -183,6 +183,21 @@
                 {% endfor %} 
             </tbody>
         </table>
+        <!--pagination-->
+        {% if studentcourse.has_other_pages %}
+        <ul class="pagination d-flex justify-content-center mt-5">
+            {% if studentcourse.has_previous %}
+            <li class="page-item mr-2 "> <a class="page-link" href="/Teacher/StudentDetailsPage/?page={{ studentcourse.previous_page_number }}"> Previous</a> </li>
+            {% endif %} {% for i in studentcourse.paginator.page_range %} {% if studentcourse.number == i %}
+            <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
+
+            {% else %}
+            <li class="page-item mr-2"><a class="page-link" href="/Teacher/StudentDetailsPage/?page={{ i }}">{{ i }}</a></li>
+            {% endif %} {% endfor %} {% if studentcourse.has_next %}
+            <li class="page-item mr-2"><a class="page-link" href="/Teacher/StudentDetailsPage/?page={{ studentcourse.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
     </div>
 
     <div id="menu1" class="tab-pane fade">

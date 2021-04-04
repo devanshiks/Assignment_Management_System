@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from teacher.views import Home, CoursesPage,AddCourse,AddAssignment,StudentDetailsPage,ViewAssignmentSubmission,AddMarks,ViewStudentSubmission
+from teacher.views import Home, CoursesPage,AddCourse,AddAssignment,StudentDetailsPage,ViewAssignmentSubmission,AddMarks,ViewStudentSubmission,DeleteAssignment
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -12,7 +12,8 @@ urlpatterns = [
     url(r'StudentDetailsPage/',StudentDetailsPage),
     url(r'ViewAssignmentSubmission/',ViewAssignmentSubmission),
     url(r'AddMarks/',AddMarks),
-    url(r'ViewStudentSubmission/',ViewStudentSubmission)
+    url(r'ViewStudentSubmission/',ViewStudentSubmission),
+    url(r'DeleteAssignment/',DeleteAssignment),
 
 ] 
 

@@ -53,14 +53,13 @@ def StudentHomePage(request):
             print(s)
             if s.exists():
                 for j in s:
-                    submitted.append(j)
+                   submitted.append(j)
             else:
                 pending.append(i)
-
         print("submitted list:",submitted)
         print("Pending list:", pending)   
         return render(request, 'StudentHome.html', {'pending':pending,'submitted':submitted})
-
+        
 def StudentCourseList(request): #show new courses as well as enrolled courses
     if request.user.is_authenticated:
         loggedin_user=request.user.username
@@ -124,8 +123,8 @@ def AddSubmission(request):
         print(assignment)
         submission_file=request.FILES['submission_file']
         submission_added_time=datetime.datetime.now()  
-        s = Submission(submission_file=submission_file, submission_assignment=assignment, submission_student=current_user,
-        submission_added_time=submission_added_time)
+        s = Submission(submission_file=submission_file, submission_assignment=assignment, 
+        submission_student=current_user,submission_added_time=submission_added_time)
         s.save()
         print("Submission uploaded successfully")
     return StudentHomePage(request)

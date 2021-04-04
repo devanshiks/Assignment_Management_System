@@ -63,7 +63,7 @@ def StudentRegister(request):
         stu_branch=stu_branch,stu_dob=stu_dob,stu_address=stu_address,stu_state=stu_state,stu_zip=stu_zip,stu_mobile_no=stu_mobile_no)
         stu.save()
         msg="You are registered!"
-        return render(request ,'StudentRegister.html',{'msg':msg})
+        return render(request ,'Login.html',{'msg':msg})
     else:
         return render(request ,'StudentRegister.html',{'msg_phone':msg_phone, 'msg_email':msg_email, 'msg_zip':msg_zip, 'msg_pass':msg_pass})
 
@@ -103,7 +103,7 @@ def TeacherRegister(request):
         teach_dob=teach_dob,teach_address=teach_address,teach_state=teach_state,teach_zip=teach_zip,teach_mobile_no=teach_mobile_no)
         teach.save()
         msg="You are registered!"
-        return render(request ,'TeacherRegister.html',{'msg':msg})
+        return render(request ,'Login.html',{'msg':msg})
     else:
         return render(request ,'TeacherRegister.html',{'msg_phone':msg_phone, 'msg_email':msg_email, 'msg_zip':msg_zip, 'msg_pass':msg_pass})
 
